@@ -8,11 +8,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    '''tours_main_page = {}
-    rn = list(range(1,13))
-    shuffle(rn)'''
-
-    return render_template('index.html', site_title=title, site_subtitle=subtitle, site_desc=description)
+    tours_main_page = {}
+    rn = list(range(1, len(tours) + 1))
+    shuffle(rn)
+    rn = rn[:6]
+    for i in rn:
+        tours_main_page[i] = tours[i]
+    return render_template('index.html', site_title=title, site_subtitle=subtitle, site_desc=description, tours=tours_main_page)
 
 
 @app.route('/from/<direction>')
