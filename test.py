@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 from random import shuffle
+title = "Stepik Travel"
+subtitle = "Для тех, кого отвлекают дома"
+description = "Лучшие направления, где никто не будет вам мешать сидеть на берегу и изучать программирование, дизайн, разработку игр и управление продуктами"
+departures = {"msk":"Из Москвы","spb":"Из Петербурга","nsk":"Из Новосибирска","ekb":"Из Екатеринбурга","kazan":"Из Казани"}
+
 tours = {
     1: {
         "title": "Marina Lake Hotel & Spa",
@@ -179,14 +184,14 @@ tours = {
      }
 
 }
-T = {}
-rn = list(range(1, 13))
-shuffle(rn)
-rn = rn[:6]
-print(*rn)
-for i in rn:
-    T[i] = tours[i]
-print(T)
-
-for t in T:
-    print(t)
+direction = 'kazan'
+departure_ru = ''
+tours_direction = {}
+for key, val in tours.items():
+    if val['departure'] == direction:
+        tours_direction[key] = val
+for key, val in departures.items():
+    if key == direction:
+        departure_ru = val
+coast = [val['price'] for key, val in tours_direction.items()]
+print(coast)
