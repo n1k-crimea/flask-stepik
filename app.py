@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 meta_data = {'title': title, 'subtitle': subtitle, 'description': description}
 
+#def find_end(n:int, val:str) -> tuple:
 
 @app.route('/')
 def index():
@@ -29,9 +30,21 @@ def direction(direction):
     for key, val in departures.items():
         if key == direction:
             departure_ru = val
+    count_tours = len(tours_direction)
+    if count_tours in [11, 12, 13, 14]:
+        ending = 'туров'
+    else:
+        if str(count_tours)[-1] in ['1']:
+            ending = 'тур'
+        elif str(count_tours)[-1] in ['2', '3', '4']:
+            ending = 'тура'
+        else:
+            ending = 'туров'
     price_list = [val['price'] for key, val in tours_direction.items()]
     nights_list = [val['nights'] for key, val in tours_direction.items()]
-    meta_departure = {'departure': departure_ru, 'count_tours': len(tours_direction), 'min_price': min(price_list),
+
+    meta_departure = {'departure': departure_ru, 'count_tours': count_tours, 'ending': ending,
+                      'min_price': min(price_list),
                       'max_price': max(price_list), 'min_nights': min(nights_list), 'max_nights': max(nights_list)}
     return render_template('direction.html', meta_data=meta_data, departures=departures,
                            tours_direction=tours_direction, meta_departure=meta_departure)

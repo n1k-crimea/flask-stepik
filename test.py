@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from random import shuffle
-title = "Stepik Travel"
+'''title = "Stepik Travel"
 subtitle = "Для тех, кого отвлекают дома"
-description = "Лучшие направления, где никто не будет вам мешать сидеть на берегу и изучать программирование, дизайн, разработку игр и управление продуктами"
+description = "Лучшие направления, где никто не будет вам мешать сидеть на берегу и изучать программирование, дизайн, разработку игр и управление продуктами"'''
 departures = {"msk":"Из Москвы","spb":"Из Петербурга","nsk":"Из Новосибирска","ekb":"Из Екатеринбурга","kazan":"Из Казани"}
 
 tours = {
@@ -184,3 +183,30 @@ tours = {
      }
 
 }
+
+tours_direction = {}
+departure_ru = ''
+direction = 'msk'
+for key, val in tours.items():
+    if val['departure'] == direction:
+        tours_direction[key] = val
+for key, val in departures.items():
+    if key == direction:
+        departure_ru = val
+count_tours = 21#len(tours_direction)
+if count_tours in [11,12,13,14]:
+    ending = 'туров'
+else:
+    if str(count_tours)[-1] in ['1']:
+        ending = 'тур'
+    elif str(count_tours)[-1] in ['2', '3', '4']:
+        ending = 'тура'
+    else:
+        ending = 'туров'
+
+price_list = [val['price'] for key, val in tours_direction.items()]
+nights_list = [val['nights'] for key, val in tours_direction.items()]
+
+meta_departure = {'departure': departure_ru, 'count_tours': count_tours, 'ending': ending, 'min_price': min(price_list),
+                  'max_price': max(price_list), 'min_nights': min(nights_list), 'max_nights': max(nights_list)}
+print(meta_departure)
