@@ -184,14 +184,3 @@ tours = {
      }
 
 }
-direction = 'kazan'
-departure_ru = ''
-tours_direction = {}
-for key, val in tours.items():
-    if val['departure'] == direction:
-        tours_direction[key] = val
-for key, val in departures.items():
-    if key == direction:
-        departure_ru = val
-coast = [val['price'] for key, val in tours_direction.items()]
-print(coast)

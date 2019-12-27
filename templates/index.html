@@ -15,7 +15,7 @@
         {% for tour_id, tour_val in tours.items() %}
         <div class="col-4">
             <div class="card mb-3" >
-                <img src="{{ tour_val.picture }}" class="card-img-top img-fluid">
+                <img src="{{ tour_val.picture }}" class="card-img-top my_img_card">
                 <div class="card-body">
                   <h5 class="card-title">{{ tour_val.title }}</h5>
                     <p class="card-text">{{ tour_val.description|truncate(60) }}</p>

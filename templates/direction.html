@@ -4,78 +4,29 @@
 
 
     <h1 class="display-5 mt-4">Летим из {{ meta_departure.departure }}</h1>
-    <p class="mb-4">Найдено 15 туров, от 26 000 до 84 600 и от 4 ночей до 15 ночей</p>
-    <!-- HERO -->
+    {% if meta_departure.count_tours == 0 %}
+        <p class="mb-4">В данный момент туры из данного пункта отсутствуют. Загляните позже<p>
+    {% else %}
+        <p class="mb-4">Найдено {{ meta_departure.count_tours }} туров, от {{ meta_departure.min_price }} до {{ meta_departure.max_price }} и от {{ meta_departure.min_nights }} ночей до {{ meta_departure.max_nights }} ночей</p>
+        <!-- HERO -->
 
-    <!-- CARDS -->
+        <!-- CARDS -->
 
-    <div class="row mt-5">
-
-        <div class="col-4">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <a href="" class="btn btn-sm btn-primary">Подробнее</a>
+        <div class="row mt-5">
+            {% for tour_id, tour_val in tours_direction.items() %}
+            <div class="col-4">
+                <div class="card mb-3" >
+                <img src="{{ tour_val.picture }}" class="card-img-top my_img_card">
+                <div class="card-body">
+                  <h5 class="card-title">{{ tour_val.title }}</h5>
+                 <p class="card-text">{{ tour_val.description|truncate(60) }}</p>
+                    <a href="/tour/{{ tour_id }}" class="btn btn-sm btn-primary">Подробнее</a>
+                </div>
             </div>
-        </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary">Подробнее</a>
             </div>
-        </div>
-        </div>
+            {% endfor %}
 
-        <div class="col-4">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid">
-            <div class="card-body">
-             <h5 class="card-title">Hotel title</h5>
-             <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-             <a href="" class="btn btn-sm btn-primary">Подробнее</a>
-            </div>
         </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary">Подробнее</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary">Подробнее</a>
-            </div>
-        </div>
-        </div>
-
-        <div class="col-4">
-            <div class="card mb-3" >
-            <img src="https://place-hold.it/300x200" class="card-img-top img-fluid">
-            <div class="card-body">
-              <h5 class="card-title">Hotel title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="" class="btn btn-sm btn-primary">Подробнее</a>
-            </div>
-        </div>
-        </div>
-    </div>
+    {% endif %}
 
 {% endblock %}
