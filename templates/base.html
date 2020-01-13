@@ -29,13 +29,12 @@
         <ul class="navbar-nav">
         {% for departure_id, departure_val in departures.items() %}
           <li class="nav-item">
-            <a class="nav-link" href="/from/{{departure_id}}">{{ departure_val }}</a>
+            <a class="nav-link {%if request.path == '/from/'+departure_id%}active{%endif%}" href="/from/{{departure_id}}">{{ departure_val }}</a>
           </li>
         {% endfor %}
         </ul>
       </div>
     </nav>
-
 {% block container %}
     {% endblock %}
 
